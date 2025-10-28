@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Wish</title>
     
-    <!-- Tailwind CSS CDN - Styling ke liye. Yeh responsive design aasan bana deta hai -->
+    <!-- Tailwind CSS CDN - Styling ke liye -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Custom Configuration for Tailwind: "Inter" font set karna aur colors ko customize karna -->
+    <!-- *** Naya Badlav: style.css file ko link kiya gaya hai *** -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Custom Configuration for Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -26,16 +29,7 @@
         }
     </script>
 
-    <style>
-        /* Animation for the modal to pop up gracefully */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .modal-content {
-            animation: fadeIn 0.3s ease-out;
-        }
-    </style>
+    <!-- NOTE: Purana <style> block yahan se hata diya gaya hai -->
 </head>
 <body class="bg-gray-50 font-sans min-h-screen p-4">
 
@@ -57,6 +51,7 @@
     <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onclick="closeModal(event, true)">
 
         <!-- Modal Content Box -->
+        <!-- 'modal-content' class par animation ab style.css se aayega -->
         <div class="modal-content bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 text-center border-4 border-secondary relative" onclick="event.stopPropagation()">
             
             <!-- Confetti/Celebration Icon -->
@@ -91,12 +86,10 @@
         function closeModal(event, isBackgroundClick) {
             const modal = document.getElementById('popup-modal');
             
-            // Agar background par click kiya gaya ho ya close button par, toh modal band karein.
             if (isBackgroundClick && event.target !== modal) {
-                return; // Agar click modal content par hua hai, toh ignore karo
+                return;
             }
 
-            // 'hidden' class add karke modal ko chhupa do
             modal.classList.add('hidden');
         }
 
@@ -113,15 +106,14 @@
                 // Placeholder Image Tag
                 const img = document.createElement('img');
                 
-                // Placeholder image URL jismein number shamil hai
-                // Jab aap apni image link dalenge, toh is URL ko badal dena.
+                // Placeholder image URL - yahi link aap apni actual image URLs se badalenge
                 img.src = `https://placehold.co/400x300/FEE2E2/B91C1C?text=Image+${i}`;
                 
                 // Aesthetics aur responsiveness ke liye classes
                 img.className = 'w-full h-full object-cover transition duration-300';
                 img.alt = `Blank Image Placeholder ${i}`;
                 
-                // Image Caption/Overlay (batane ke liye ki yahan ek image aayegi)
+                // Image Caption/Overlay
                 const overlay = document.createElement('div');
                 overlay.className = 'absolute inset-0 bg-primary bg-opacity-10 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300 text-white font-bold text-xl';
                 overlay.textContent = `Photo Slot ${i}`;
