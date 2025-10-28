@@ -135,7 +135,7 @@
                 const img = document.createElement('img');
                 
                 // Temporary Placeholder Source. Jab aap apni asli images use karenge, to ise imageSources[i] se badal dein.
-                img.src = `https://via.placeholder.com/300x225?text=Photo+${i + 1}`;
+                img.src = `Screenshot_20251028-154226.png`;
                 
                 img.alt = `Birthday Image Placeholder ${i + 1}`;
                 img.className = 'w-full h-full object-cover opacity-20 group-hover:opacity-30 transition duration-300'; 
