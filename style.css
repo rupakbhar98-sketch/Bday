@@ -1,0 +1,20 @@
+/*
+NOTE: Most styling (like colors, layout, and responsiveness)
+is handled directly by Tailwind CSS classes in your index.html file.
+This is only the custom animation used for the pop-up modal.
+*/
+​/* Animation for the modal to pop up gracefully /
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: scale(0.95); / Thoda sa chhota shuru ho /
+}
+to {
+opacity: 1;
+transform: scale(1); / Pura size ho jaye */
+}
+}
+​/* Modal content par animation lagana /
+.modal-content {
+animation: fadeIn 0.3s ease-out; / 0.3 second mein dheere se dikhe */
+}
