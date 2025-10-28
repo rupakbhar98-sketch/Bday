@@ -43,11 +43,11 @@
         <h1 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight">
             🎉 **A Special Collection of 25 Moments** 🎉
         </h1>
-        <p class="text-gray-500 mt-2">Niche di gayi jagah mein aap apni tasveerein baad mein jod sakte hain.</p>
+        <p class="text-gray-500 mt-2">Niche di gayi tasveerein aapke liye hain!</p>
     </header>
 
     <main id="image-gallery" class="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-4 pb-10">
-    </main>
+        </main>
     
     <hr class="border-gray-300 my-8" />
 
@@ -91,7 +91,7 @@
             modal.classList.add('hidden');
         }
 
-        // 25 blank image placeholders banane ka function
+        // 25 image placeholders banane ka function
         function createPlaceholders() {
             const gallery = document.getElementById('image-gallery');
             const numImages = 25; 
@@ -108,6 +108,58 @@
                 'Screenshot_20251028-155115.png', 
                 'Screenshot_20251028-155125.png', 
                 'Screenshot_20251028-155133.png',
+                'Screenshot_20251028-155140.png',
+                'Screenshot_20251028-155145.png',
+                'Screenshot_20251028-155154.png',
+                'Screenshot_20251028-155201.png',
+                'Screenshot_20251028-155208.png',
+                'Screenshot_20251028-155216.png',
+                'Screenshot_20251028-155222.png',
+                'Screenshot_20251028-155234.png',
+                'Screenshot_20251028-155242.png',
+                'Screenshot_20251028-155253.png',
+                'Screenshot_20251028-155301.png',
+                'Screenshot_20251028-155308.png',
+                'Screenshot_20251028-155316.png',
+                'Screenshot_20251028-155323.png',
+                'Screenshot_20251028-155331.png' 
+            ];
+            
+            // Loop chala kar 25 containers banayenge
+            for (let i = 0; i < numImages; i++) {
+                // Image container
+                const container = document.createElement('div');
+                container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200 cursor-pointer group';
+                
+                // Placeholder Image Tag
+                const img = document.createElement('img');
+                
+                // *** BADLAV KIYA GAYA HAI: Ab yeh asli imageSources array ka use kar raha hai ***
+                img.src = imageSources[i]; 
+                
+                img.alt = `Birthday Image ${i + 1}`;
+                // opacity class hata di gayi hai taki asli image poori dikhe
+                img.className = 'w-full h-full object-cover transition duration-300'; 
+
+                // Image par hover karne par Photo number dikhane ke liye overlay
+                const textOverlay = document.createElement('div');
+                textOverlay.className = 'absolute inset-0 flex items-center justify-center text-lg font-bold text-white bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300';
+                textOverlay.textContent = `Moment ${i + 1}`; 
+
+                container.appendChild(img);
+                container.appendChild(textOverlay);
+                gallery.appendChild(container);
+            }
+        }
+
+        // Page load hote hi placeholders bana dein aur modal dikha dein
+        document.addEventListener('DOMContentLoaded', () => {
+            createPlaceholders();
+            document.getElementById('popup-modal').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
                 'Screenshot_20251028-155140.png',
                 'Screenshot_20251028-155145.png',
                 'Screenshot_20251028-155154.png',
