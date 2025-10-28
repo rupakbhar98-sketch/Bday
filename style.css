@@ -1,13 +1,6 @@
 /* style.css */
 
 /*
-   Is file mein koi aur custom CSS joda ja sakta hai.
-   Modal animation pehle se hi HTML ke <style> block mein define ho chuka hai.
-*/
-
-/* Example: Agar aap gallery images ko thoda aur stylish banana chahte hain */
-/*
-#image-gallery div {
-    border: 1px solid #ddd;
-}
+   Tailwind CSS ka upyog karne ke karan, yahan koi alag se styling ki zaroorat nahi hai.
+   Sabhi styles HTML mein classes ke roop mein diye gaye hain.
 */
