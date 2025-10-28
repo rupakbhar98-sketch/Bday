@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <!-- Viewport Meta Tag: Mobile responsiveness ke liye bahut zaroori hai -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wish</title>
+    
+    <!-- Tailwind CSS CDN - Styling ke liye. Yeh responsive design aasan bana deta hai -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Configuration for Tailwind: "Inter" font set karna aur colors ko customize karna -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#E91E63', // Birthday Pink
+                        'secondary': '#FFC107', // Gold/Yellow
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animation for the modal to pop up gracefully */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-content {
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans min-h-screen p-4">
+
+    <!-- HEADER: Main Page Title -->
+    <header class="text-center py-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight">
+            🎉 A Special Collection 🎉
+        </h1>
+        <p class="text-gray-500 mt-2">Niche di gayi jagah mein aap apni tasveerein baad mein jod sakte hain.</p>
+    </header>
+
+    <!-- IMAGE GALLERY: 20 Blank Placeholders -->
+    <main id="image-gallery" class="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pb-10">
+        <!-- Images will be injected here by JavaScript -->
+    </main>
+    
+    <!-- POP-UP MODAL STRUCTURE -->
+    <!-- 'hidden' class shuru mein chhupa (hidden) rakhta hai. JS isse hata dega. -->
+    <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onclick="closeModal(event, true)">
+
+        <!-- Modal Content Box -->
+        <div class="modal-content bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 text-center border-4 border-secondary relative" onclick="event.stopPropagation()">
+            
+            <!-- Confetti/Celebration Icon -->
+            <div class="text-5xl mb-4">
+                🎂
+            </div>
+
+            <!-- The Main Message as requested by the user -->
+            <h2 class="text-3xl font-bold text-primary mb-2">
+                Happy Birthday my dear madam ji
+            </h2>
+            
+            <p class="text-gray-600 mb-6">
+                Aapke liye yeh chhota sa tohfa!
+            </p>
+
+            <!-- Close Button -->
+            <button onclick="closeModal(event)" class="w-full bg-primary hover:bg-pink-700 text-white font-semibold py-2 rounded-lg transition duration-150 shadow-md">
+                Chalein, Gallery Dekhte Hain!
+            </button>
+            
+            <!-- Close Button on top right corner for convenience -->
+            <button onclick="closeModal(event)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-800 p-2 text-xl font-bold">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Modal ko close karne ka function
+        function closeModal(event, isBackgroundClick) {
+            const modal = document.getElementById('popup-modal');
+            
+            // Agar background par click kiya gaya ho ya close button par, toh modal band karein.
+            if (isBackgroundClick && event.target !== modal) {
+                return; // Agar click modal content par hua hai, toh ignore karo
+            }
+
+            // 'hidden' class add karke modal ko chhupa do
+            modal.classList.add('hidden');
+        }
+
+        // 20 blank image placeholders banane ka function
+        function createPlaceholders() {
+            const gallery = document.getElementById('image-gallery');
+            const numImages = 20;
+
+            for (let i = 1; i <= numImages; i++) {
+                // Image container
+                const container = document.createElement('div');
+                container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200';
+                
+                // Placeholder Image Tag
+                const img = document.createElement('img');
+                
+                // Placeholder image URL jismein number shamil hai
+                // Jab aap apni image link dalenge, toh is URL ko badal dena.
+                img.src = `https://placehold.co/400x300/FEE2E2/B91C1C?text=Image+${i}`;
+                
+                // Aesthetics aur responsiveness ke liye classes
+                img.className = 'w-full h-full object-cover transition duration-300';
+                img.alt = `Blank Image Placeholder ${i}`;
+                
+                // Image Caption/Overlay (batane ke liye ki yahan ek image aayegi)
+                const overlay = document.createElement('div');
+                overlay.className = 'absolute inset-0 bg-primary bg-opacity-10 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300 text-white font-bold text-xl';
+                overlay.textContent = `Photo Slot ${i}`;
+
+                container.appendChild(img);
+                container.appendChild(overlay);
+                gallery.appendChild(container);
+            }
+        }
+
+        // Jab poora page load ho jaye
+        window.onload = function() {
+            // 1. Modal ko turant dikhao
+            const modal = document.getElementById('popup-modal');
+            modal.classList.remove('hidden');
+
+            // 2. Image placeholders banao
+            createPlaceholders();
+        };
+
+    </script>
+</body>
+</html>
+
