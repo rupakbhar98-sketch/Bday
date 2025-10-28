@@ -1,85 +1,161 @@
-// Modal ko close karne ka function
-function closeModal(event, isBackgroundClick) {
-    const modal = document.getElementById('popup-modal');
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wish</title>
     
-    if (isBackgroundClick && event.target !== modal) {
-        return;
-    }
-
-    modal.classList.add('hidden');
-}
-
-// 25 blank image placeholders banane ka function
-function createPlaceholders() {
-    const gallery = document.getElementById('image-gallery');
-    // *** Yahan badlav kiya gaya hai: 25 placeholders ***
-    const numImages = 25; 
-
-    // Images ki list - Yahi woh jagah hai jahan aap apni 25 photos ke link/naam dalenge
-    const imageSources = [
-        // 1. Apni pehli image ka naam/link yahan dalen
-        'Screenshot_20251028-154226.png', 
-        // 2. Doosri image ka naam/link
-        'Screenshot_20251028-154931.png', 
-        // 3. Teesari image ka naam/link
-        'Screenshot_20251028-154949.png', 
-        'Screenshot_20251028-154954.png', 
-        'Screenshot_20251028-155020.png', 
-        'Screenshot_20251028-155031.png', 
-        'Screenshot_20251028-155107.png', 
-        'Screenshot_20251028-155115.png', 
-        'Screenshot_20251028-155125.png', 
-        'Screenshot_20251028-155133.png',
-        'Screenshot_20251028-155140.png',
-        'Screenshot_20251028-155145.png',
-        'Screenshot_20251028-155154.png',
-        'Screenshot_20251028-155201.png',
-        'Screenshot_20251028-155208.png',
-        'Screenshot_20251028-155216.png',
-        'Screenshot_20251028-155222.png',
-        'Screenshot_20251028-155234.png',
-        'Screenshot_20251028-155242.png',
-        'Screenshot_20251028-155253.png',
-        'Screenshot_20251028-155301.png',
-        'Screenshot_20251028-155308.png',
-        'Screenshot_20251028-155316.png',
-        'Screenshot_20251028-155323.png',
-        // 25. Aakhiri image ka naam/link
-        'Screenshot_20251028-155331.png' 
-    ];
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    // Loop chala kar 25 containers banayenge
-    for (let i = 0; i < numImages; i++) {
-        // Image container
-        const container = document.createElement('div');
-        container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200 cursor-pointer group';
-        
-        // Placeholder Image Tag
-        const img = document.createElement('img');
-        
-        // Image Source Set Karna:
-        // Agar aap imageSources array ka use kar rahe hain, to niche wali line ka use karein:
-        // img.src = imageSources[i];
-        
-        // Agar aap testing ke liye blank placeholder hi chahte hain to is line ka use karein:
-        img.src = `https://via.placeholder.com/300x225?text=Photo+${i + 1}`;
-        
-        img.alt = `Birthday Image Placeholder ${i + 1}`;
-        img.className = 'w-full h-full object-cover opacity-20 group-hover:opacity-30 transition duration-300'; 
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#E91E63', // Birthday Pink
+                        'secondary': '#FFC107', // Gold/Yellow
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        .modal-content {
+            animation: popIn 0.3s ease-out forwards;
+        }
+    </style>
 
-        // Center text for better visual
-        const textOverlay = document.createElement('div');
-        textOverlay.className = 'absolute inset-0 flex items-center justify-center text-sm sm:text-base font-semibold text-gray-500 pointer-events-none';
-        textOverlay.textContent = `Photo ${i + 1}`; // Photo number display
+</head>
+<body class="bg-gray-50 font-sans min-h-screen p-4">
 
-        container.appendChild(img);
-        container.appendChild(textOverlay);
-        gallery.appendChild(container);
-    }
-}
+    <header class="text-center py-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight">
+            🎉 **A Special Collection of 25 Moments** 🎉
+        </h1>
+        <p class="text-gray-500 mt-2">Niche di gayi jagah mein aap apni tasveerein baad mein jod sakte hain.</p>
+    </header>
 
-// Page load hote hi placeholders bana dein aur modal dikha dein
-document.addEventListener('DOMContentLoaded', () => {
-    createPlaceholders();
-    document.getElementById('popup-modal').classList.remove('hidden');
-});
+    <main id="image-gallery" class="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 gap-4 pb-10">
+    </main>
+    
+    <hr class="border-gray-300 my-8" />
+
+    <div id="popup-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onclick="closeModal(event, true)">
+
+        <div class="modal-content bg-white rounded-xl shadow-2xl max-w-sm w-full p-6 text-center border-4 border-secondary relative" onclick="event.stopPropagation()">
+            
+            <div class="text-5xl mb-4">
+                🎂
+            </div>
+
+            <h2 class="text-3xl font-bold text-primary mb-2">
+                **Happy Birthday my dear madam ji**
+            </h2>
+            
+            <p class="text-gray-600 mb-6">
+                Aapke liye yeh chhota sa tohfa!
+            </p>
+
+            <button onclick="closeModal(event)" class="w-full bg-primary hover:bg-pink-700 text-white font-semibold py-2 rounded-lg transition duration-150 shadow-md">
+                Chalein, Gallery Dekhte Hain!
+            </button>
+            
+            <button onclick="closeModal(event)" class="absolute top-2 right-2 text-gray-400 hover:text-gray-800 p-2 text-xl font-bold leading-none">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <hr class="border-gray-300 my-8" />
+
+    <script>
+        // Modal ko close karne ka function
+        function closeModal(event, isBackgroundClick) {
+            const modal = document.getElementById('popup-modal');
+            
+            if (isBackgroundClick && event.target !== modal) {
+                return;
+            }
+
+            modal.classList.add('hidden');
+        }
+
+        // 25 blank image placeholders banane ka function
+        function createPlaceholders() {
+            const gallery = document.getElementById('image-gallery');
+            const numImages = 25; 
+
+            // Images ki list - Yahi woh jagah hai jahan aap apni 25 photos ke link/naam dalenge
+            const imageSources = [
+                'Screenshot_20251028-154226.png', 
+                'Screenshot_20251028-154931.png', 
+                'Screenshot_20251028-154949.png', 
+                'Screenshot_20251028-154954.png', 
+                'Screenshot_20251028-155020.png', 
+                'Screenshot_20251028-155031.png', 
+                'Screenshot_20251028-155107.png', 
+                'Screenshot_20251028-155115.png', 
+                'Screenshot_20251028-155125.png', 
+                'Screenshot_20251028-155133.png',
+                'Screenshot_20251028-155140.png',
+                'Screenshot_20251028-155145.png',
+                'Screenshot_20251028-155154.png',
+                'Screenshot_20251028-155201.png',
+                'Screenshot_20251028-155208.png',
+                'Screenshot_20251028-155216.png',
+                'Screenshot_20251028-155222.png',
+                'Screenshot_20251028-155234.png',
+                'Screenshot_20251028-155242.png',
+                'Screenshot_20251028-155253.png',
+                'Screenshot_20251028-155301.png',
+                'Screenshot_20251028-155308.png',
+                'Screenshot_20251028-155316.png',
+                'Screenshot_20251028-155323.png',
+                'Screenshot_20251028-155331.png' 
+            ];
+            
+            // Loop chala kar 25 containers banayenge
+            for (let i = 0; i < numImages; i++) {
+                // Image container
+                const container = document.createElement('div');
+                container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200 cursor-pointer group';
+                
+                // Placeholder Image Tag
+                const img = document.createElement('img');
+                
+                // Temporary Placeholder Source. Jab aap apni asli images use karenge, to ise imageSources[i] se badal dein.
+                img.src = `https://via.placeholder.com/300x225?text=Photo+${i + 1}`;
+                
+                img.alt = `Birthday Image Placeholder ${i + 1}`;
+                img.className = 'w-full h-full object-cover opacity-20 group-hover:opacity-30 transition duration-300'; 
+
+                // Center text for better visual
+                const textOverlay = document.createElement('div');
+                textOverlay.className = 'absolute inset-0 flex items-center justify-center text-sm sm:text-base font-semibold text-gray-500 pointer-events-none';
+                textOverlay.textContent = `Photo ${i + 1}`; // Photo number display
+
+                container.appendChild(img);
+                container.appendChild(textOverlay);
+                gallery.appendChild(container);
+            }
+        }
+
+        // Page load hote hi placeholders bana dein aur modal dikha dein
+        document.addEventListener('DOMContentLoaded', () => {
+            createPlaceholders();
+            document.getElementById('popup-modal').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
