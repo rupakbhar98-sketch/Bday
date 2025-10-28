@@ -1,55 +1,85 @@
-// 1. Modal ko close karne ka function
-// Yeh function pop-up window ko chhupata hai jab user button dabata hai ya background par click karta hai.
+// Modal ko close karne ka function
 function closeModal(event, isBackgroundClick) {
     const modal = document.getElementById('popup-modal');
     
-    // Agar background par click kiya gaya ho, lekin click modal ki content box par hua ho, 
-    // toh function se bahar nikal jao (taaki accidental click se modal band na ho).
     if (isBackgroundClick && event.target !== modal) {
-        return; 
+        return;
     }
 
-    // Modal ko screen se chhupa do.
     modal.classList.add('hidden');
 }
 
-// 2. 20 blank image placeholders banane ka function
+// 25 blank image placeholders banane ka function
 function createPlaceholders() {
     const gallery = document.getElementById('image-gallery');
-    const numImages = 20;
+    // *** Yahan badlav kiya gaya hai: 25 placeholders ***
+    const numImages = 25; 
 
-    for (let i = 1; i <= numImages; i++) {
-        // Image container banane ke liye div
+    // Images ki list - Yahi woh jagah hai jahan aap apni 25 photos ke link/naam dalenge
+    const imageSources = [
+        // 1. Apni pehli image ka naam/link yahan dalen
+        'Screenshot_20251028-154226.png', 
+        // 2. Doosri image ka naam/link
+        'Screenshot_20251028-154931.png', 
+        // 3. Teesari image ka naam/link
+        'Screenshot_20251028-154949.png', 
+        'Screenshot_20251028-154954.png', 
+        'Screenshot_20251028-155020.png', 
+        'Screenshot_20251028-155031.png', 
+        'Screenshot_20251028-155107.png', 
+        'Screenshot_20251028-155115.png', 
+        'Screenshot_20251028-155125.png', 
+        'Screenshot_20251028-155133.png',
+        'Screenshot_20251028-155140.png',
+        'Screenshot_20251028-155145.png',
+        'Screenshot_20251028-155154.png',
+        'Screenshot_20251028-155201.png',
+        'Screenshot_20251028-155208.png',
+        'Screenshot_20251028-155216.png',
+        'Screenshot_20251028-155222.png',
+        'Screenshot_20251028-155234.png',
+        'Screenshot_20251028-155242.png',
+        'Screenshot_20251028-155253.png',
+        'Screenshot_20251028-155301.png',
+        'Screenshot_20251028-155308.png',
+        'Screenshot_20251028-155316.png',
+        'Screenshot_20251028-155323.png',
+        // 25. Aakhiri image ka naam/link
+        'Screenshot_20251028-155331.png' 
+    ];
+    
+    // Loop chala kar 25 containers banayenge
+    for (let i = 0; i < numImages; i++) {
+        // Image container
         const container = document.createElement('div');
-        container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200';
+        container.className = 'relative aspect-w-4 aspect-h-3 overflow-hidden rounded-xl shadow-lg transform hover:scale-[1.02] transition duration-300 bg-gray-200 cursor-pointer group';
         
         // Placeholder Image Tag
         const img = document.createElement('img');
         
-        // Placeholder image URL. Yahi link aap apni actual image URLs se badalenge.
-        img.src = `https://placehold.co/400x300/FEE2E2/B91C1C?text=Image+${i}`;
+        // Image Source Set Karna:
+        // Agar aap imageSources array ka use kar rahe hain, to niche wali line ka use karein:
+        // img.src = imageSources[i];
         
-        // Styling classes
-        img.className = 'w-full h-full object-cover transition duration-300';
-        img.alt = `Blank Image Placeholder ${i}`;
+        // Agar aap testing ke liye blank placeholder hi chahte hain to is line ka use karein:
+        img.src = `https://via.placeholder.com/300x225?text=Photo+${i + 1}`;
         
-        // Image Caption/Overlay text
-        const overlay = document.createElement('div');
-        overlay.className = 'absolute inset-0 bg-primary bg-opacity-10 flex items-center justify-center opacity-0 hover:opacity-100 transition duration-300 text-white font-bold text-xl';
-        overlay.textContent = `Photo Slot ${i}`;
+        img.alt = `Birthday Image Placeholder ${i + 1}`;
+        img.className = 'w-full h-full object-cover opacity-20 group-hover:opacity-30 transition duration-300'; 
+
+        // Center text for better visual
+        const textOverlay = document.createElement('div');
+        textOverlay.className = 'absolute inset-0 flex items-center justify-center text-sm sm:text-base font-semibold text-gray-500 pointer-events-none';
+        textOverlay.textContent = `Photo ${i + 1}`; // Photo number display
 
         container.appendChild(img);
-        container.appendChild(overlay);
+        container.appendChild(textOverlay);
         gallery.appendChild(container);
     }
 }
 
-// 3. window.onload - Jab poora HTML document load ho jaye, tab yeh chalao.
-window.onload = function() {
-    // 1. Modal ko turant dikhao
-    const modal = document.getElementById('popup-modal');
-    modal.classList.remove('hidden');
-
-    // 2. Image placeholders gallery mein banao
+// Page load hote hi placeholders bana dein aur modal dikha dein
+document.addEventListener('DOMContentLoaded', () => {
     createPlaceholders();
-};
+    document.getElementById('popup-modal').classList.remove('hidden');
+});
