@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | MASTER HUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+  <div class="animated-bg" aria-hidden="true"></div>
+  <main class="auth-page">
+    <section class="auth-card">
+      <h1>Create Account</h1>
+      <p>Set up your MASTER HUB profile (UI placeholder only).</p>
+
+      <form class="auth-form" novalidate>
+        <div class="input-group">
+          <input type="text" id="full-name" required placeholder=" " />
+          <label for="full-name">Full Name</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="signup-email" required placeholder=" " />
+          <label for="signup-email">Email Address</label>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="signup-password" required placeholder=" " />
+          <label for="signup-password">Password</label>
+        </div>
+
+        <button type="submit" class="primary-btn">Create Account</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="index.html">← Back to Home</a>
+        <a href="signin.html">Already have an account?</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
